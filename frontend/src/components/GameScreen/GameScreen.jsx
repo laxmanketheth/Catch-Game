@@ -6,21 +6,25 @@ import { useRef } from 'react';
 
 const GameScreen = () => {
 
-    const [topScore, setTopScore] = useState(0)
-    const [leftStyles, setLeftStyles] = useState({ left: '500px' })
-    let parsedVal = parseInt(leftStyles.left)
-    // console.log(parsedVal);
-    let boatImgRef = useRef(null)
+    const [score, setScore] = useState(0);
 
-//=========== array with image paths ==============//
+    const [randomImgStyle, setRandomImgStyle] = useState({ top: '0px' });
+
+    const [randomImage, setRandomImage] = useState('');
+    const [topScore, setTopScore] = useState(0);
+    const [leftStyles, setLeftStyles] = useState({ left: '500px' });
+    let parsedVal = parseInt(leftStyles.left);
+    // console.log(parsedVal);
+    let boatImgRef = useRef(null);
+    // let randomImgRef = useRef(null);
+    // console.log(randomImgRef.current);
+
+    //================= ImageArray to store image paths ==============//
     const ImgArray = ['/p1.png', '/p2.png', '/p3.png', '/p4.png', '/e1.png', '/e2.png']
     const randomIndex = Math.floor(Math.random() * 6)
-    // console.log(randomNum);
-    const image = ImgArray[randomIndex]
-    // console.log(image);
+
 
     //========== this useEffect is for fetching data ==========//
-
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('http://localhost:8080/')
@@ -33,12 +37,26 @@ const GameScreen = () => {
             setTopScore(highestScore)
         }
         fetchData();
+
+        //=========================================================================================//
+        //=== had to update randomImage state inside the useEffect because calling the setRandomImage function inside the component body triggers a re-render.
+        // and it, in turn, causes the component to re-render infinitely, resulting in the error message.  
+
+        setRandomImage(ImgArray[randomIndex]);
+
+
+        //    setInterval(() => {
+        //     console.log('random index',randomIndex);
+        //     let image = ImgArray[randomIndex]
+        //     setRandomImage(image)
+        //    }, 1000);
+        //=========================================================================================//
+
     }, []);
-    // console.log(topScore);
 
 
-    //==========this useEffect is for arrow movement==========//
-
+    //============== this useEffect is for arrow movement ================//
+    //=== By including leftStyles in the dependency array, the effect will be re-run whenever leftStyles changes===//
     useEffect(() => {
         const handleKeyPress = (e) => {
 
@@ -64,7 +82,33 @@ const GameScreen = () => {
         return () => {
             window.removeEventListener('keydown', handleKeyPress);
         };
-    }, [leftStyles])
+    }, [leftStyles]);
+
+
+    //======= When we access the style property of an element immediately after rendering without using useEffect, it's possible that the element hasn't been fully rendered and
+    //==  thats why we pass it inside useEffect to make sure the element has rendered at least once so that its value can be accessed.thus, we can access randomImgRef.current.style property==//
+    //==otherwise  the initial value is null and if we access it immediately then it will be null or give errors//
+
+    let randomImgRef = useRef(null);
+
+    useEffect(() => {
+        let randomImgElement = randomImgRef.current
+        // console.log(randomImgElement);
+        let parsedValue = parseInt(randomImgElement.style.top)
+        // console.log('top val is', parsedValue);
+        const interval = setInterval(() => {
+            let newTopValue = parsedValue + 15 + 'px'
+            setRandomImgStyle({ top: newTopValue })
+            console.log('this is latest top style',randomImgStyle);
+        }, 100);
+        return () => {
+            clearInterval(interval);
+          };
+
+    }, [randomImgStyle])
+
+
+
 
 
     return (
@@ -74,23 +118,24 @@ const GameScreen = () => {
             </div>
 
             <div className='subContainer'>
-
                 <div className="bgImgContainer">
-
                     <div className='boatContainer'>
 
-                        {
-                            <img src={image} alt="" />
-                        }
+                        {<img className='randomImg'
+                            style={randomImgStyle}
+                            ref={randomImgRef}
+                            src={randomImage}
+                            alt="randomImg"
 
+                        />}
 
-                        {/* <img
+                        <img
                             style={leftStyles}
                             ref={boatImgRef}
                             className='boatImg'
-                            src="/boat.png" 
-                            // src ={image5}
-                            alt="boat Image" /> */}
+                            src="/boat.png"
+                            alt="boat Image"
+                        />
                     </div>
                 </div>
 

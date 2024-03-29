@@ -9,6 +9,7 @@
 
 .subContainer{
     height: 88vh;
+    // border: 1px solid;
 }
 
 .gameHeading {
@@ -29,11 +30,18 @@
     height: 100%;
 }
 
+.randomImg{
+    position: absolute;
+    height: 15%;
+    left: 500px;
+    // bottom: 0px;
+}
+
 .boatContainer{
     position: relative;
     height:100%;
     width: 100%;
-    // border: 1px solid red;
+    border: 1px solid red;
 }
 
 .boatImg{
