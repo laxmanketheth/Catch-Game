@@ -1,0 +1,88 @@
+.mostOuterContainer{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c4c4c4;
+}
+
+.outerMostContainer{
+    background-image: url('/bg1.png');
+    // border: 2px solid red;
+    border: none;
+    box-shadow: 0 0 8px 2px rgb(5, 51, 76);
+    height: 80vh;
+    width: 75vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.parentContainer{
+    background-image: url('/bg1.png');
+    // border: 1px solid blue;
+    border-radius: 20px;
+    height: 50%;
+    width: 40%;
+}
+
+.boxTitle{
+    // border: 2px solid purple;
+    text-align: center;
+    padding: 10px;
+    >h1{
+        font-size: 40px;
+    }
+}
+
+.infoContainer{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    // margin-top: 20px;
+    align-items: center;
+    // border: 1px solid greenyellow;
+}
+.scoreContainer{
+    // border: 2px solid blueviolet;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    >h2{
+        font-size: 30px;
+    }
+    >p{
+        font-size: 35px;
+        border: 2px solid;
+        padding: 5px 10px;
+        border-radius: 50%;
+        background-color: rgb(214, 211, 211);
+        margin-bottom: 15px;
+    }
+    >input{
+        height: 40px;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+    >button{
+        height: 30px;
+        width: 80px;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius:5px;
+        color: rgb(214, 211, 211);
+        background-color:rgb(158, 66, 66, 0.9);
+        &:hover{
+            transform: scale(1.2);
+            transition: transform 0.25s ease;
+            color: rgb(158, 66, 66, 0.9);
+            background: rgb(214, 211, 211);
+        }
+    }
+}
