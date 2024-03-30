@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux'
 
 const ScoreSubmitBox = () => {
 
-    const score = useSelector(state => state.score[0])
+    const score = useSelector(state => state.score)
     // console.log('score in submit box',score);
 
     return (

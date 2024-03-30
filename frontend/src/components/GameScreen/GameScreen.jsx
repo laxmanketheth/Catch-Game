@@ -5,8 +5,8 @@ import { useState, useEffect } from 'react'
 import { useRef } from 'react';
 // import ScoreSubmitBox from '../ScoreSubmitBox/ScoreSubmitBox';
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from 'react-redux'
-import { addScore,minusScore } from '../../store/scoreSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import { addScore, minusScore } from '../../store/scoreSlice';
 
 
 let currentTime = Date.now()
@@ -18,11 +18,12 @@ const GameScreen = () => {
     const [boatStyles, setBoatStyles] = useState({ left: '500px', height: '120px' });
     const [randomImage, setRandomImage] = useState('');
     const [topScore, setTopScore] = useState(0);
-    const [score, setScore] = useState(0);
 
     //navigate hook is used later to navigating to saveScore box when the game time has expired//
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const score = useSelector(state => state.score)
+    // console.log('reading score',score);
 
     // === using useRef hook === //
     let boatImgRef = useRef(null);
@@ -43,22 +44,14 @@ const GameScreen = () => {
         let imgUrl = randomImg.src
         let image1 = 'http://localhost:5173/e1.png'
         let image2 = 'http://localhost:5173/e2.png'
+
         if (imgUrl === image1 || imgUrl === image2) {
-            // console.log('current score', score);
-            let updatedScore = score - 100
-            setScore(updatedScore);
-            dispatch(minusScore(score));
-            // console.log('negative new score', score);
-            // setScoreIncreased(true);
+            let updatedScore = - 100
+            dispatch(minusScore(updatedScore));
         } else {
-            // console.log('current score', score);
-            let updatedScore = score + 50
-            setScore(updatedScore);
-            dispatch(addScore(score));
+            let updatedScore = + 50
+            dispatch(addScore(updatedScore));
         }
-        // console.log(score);
-    //======== dispatching addScore to add score in store======//
-        // dispatch(addScore(score));
 
     };
 
@@ -71,9 +64,7 @@ const GameScreen = () => {
         //======== accessing random image properties ==========//
         let randomImg = randomImgRef.current
         let imageBottomValue = parseInt(randomImg.style.bottom);
-        // let newDisplayProperty = 'none'
         let imgLeftValue = parseInt(randomImg.style.left)
-        // console.log('image left Value',imgLeftValue);
 
         //======== accessing boat image properties ==========//
         let boatImg = boatImgRef.current
