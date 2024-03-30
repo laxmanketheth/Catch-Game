@@ -187,7 +187,7 @@ const GameScreen = () => {
                     setRandomImage(ImgArray[randomIndex]);
                 };
 
-            }, 100);
+            }, 80); //** this millisseconds control the speed of random images falling down */
             return () => {
                 clearInterval(interval);
             };

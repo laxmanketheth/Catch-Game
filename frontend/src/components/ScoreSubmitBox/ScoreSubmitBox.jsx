@@ -1,12 +1,45 @@
 import React from 'react'
 import './ScoreSubmitbox.scss'
 import { Link } from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
 
 const ScoreSubmitBox = () => {
 
-    const score = useSelector(state => state.score)
-    // console.log('score in submit box',score);
+    const score = useSelector(state => state.score);
+    const [inputData, setInputData] = useState('');
+    // console.log('input val',inputData);
+    const [playerData, setPlayerData] = useState({})
+    console.log(playerData);
+
+    const handleChange = (e) => {
+        const value = e.target.value
+        setInputData(value)
+    };
+
+    const handleSubmit = () => {
+        //using if statement will help in updating playerData only if the input field is populated //
+        if (inputData) {
+            setPlayerData({
+                playerName: inputData,
+                score: score
+            });
+        };
+        //setting input data using setInputData to empty string will
+        // make the input field empty once the submit button is clicked//
+        setInputData('')
+    };
+
+    // =============== saving to database ========= //
+    useEffect(() => {
+        fetch('http://localhost:8080/score', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(playerData)
+        })
+    });
 
     return (
         <div className='mostOuterContainer'>
@@ -23,9 +56,19 @@ const ScoreSubmitBox = () => {
                         <div className='scoreContainer'>
                             <h2>Your Score</h2>
                             <p>{score}</p>
-                            <input type="text" placeholder='Enter Your Name' name="" id="" />
-                            <button>Save</button>
-                           <Link to={'/'}> <button className='goHomeBtn'>go home</button></Link>
+
+                            <input
+                                type="text"
+                                placeholder='Enter Your Name'
+                                onChange={handleChange}
+                                value={inputData}
+                                id=""
+                            />
+
+                            <button onClick={handleSubmit}>
+                                Save
+                            </button>
+                            <Link to={'/'}> <button className='goHomeBtn'>go home</button></Link>
                         </div>
 
                     </div>
