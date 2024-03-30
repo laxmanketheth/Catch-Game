@@ -13,8 +13,9 @@ const StartMenu = () => {
 
                 <div className="bgImgContainer">
                     <div className="buttonsContainer">
-                       <Link to={'/startgame'}> <a className='btn'>Start Game</a></Link>
-                       <Link to={'/leaderboard'}> <a className='btn'>Leader Board</a></Link>
+                        {/* need to fix the css of buttons because i have changed the <a> tags to buttons now because of error that i should not put <a> tag inside Link tag */}
+                       <Link to={'/startgame'}> <button className='btn'>Start Game</button></Link>
+                       <Link to={'/leaderboard'}> <button className='btn'>Leader Board</button></Link>
                     </div>
                 </div>
 

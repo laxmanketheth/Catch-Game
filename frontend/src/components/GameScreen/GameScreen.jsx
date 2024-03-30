@@ -6,9 +6,12 @@ import { useRef } from 'react';
 
 const GameScreen = () => {
 
-    const [score, setScore] = useState(0);
+    // const [score, setScore] = useState(0);
 
-    const [randomImgStyle, setRandomImgStyle] = useState({ top: '0px' });
+    const [randomImgStyle, setRandomImgStyle] = useState({ bottom: '520px' });
+    // const [boatImgHeight, setBoatImgHeight] = useState({height: '120px'})
+    // console.log(randomImgStyle);
+    // console.log(boatImgHeight);
 
     const [randomImage, setRandomImage] = useState('');
     const [topScore, setTopScore] = useState(0);
@@ -44,13 +47,20 @@ const GameScreen = () => {
 
         setRandomImage(ImgArray[randomIndex]);
 
+        // =====this is for changing random image === //
 
-        //    setInterval(() => {
-        //     console.log('random index',randomIndex);
+        //     const interval =  setInterval(() => {
+        //     // console.log('random index',randomIndex);
         //     let image = ImgArray[randomIndex]
+        //     // console.log(randomIndex);
         //     setRandomImage(image)
+        //     console.log(randomImage);
         //    }, 1000);
         //=========================================================================================//
+        //    return ()=> {
+        //     clearInterval(interval)
+        //    };
+        //==code above is for changing random image==//      
 
     }, []);
 
@@ -94,19 +104,28 @@ const GameScreen = () => {
     useEffect(() => {
         let randomImgElement = randomImgRef.current
         // console.log(randomImgElement);
-        let parsedValue = parseInt(randomImgElement.style.top)
+        let parsedValue = parseInt(randomImgElement.style.bottom)
         // console.log('top val is', parsedValue);
         const interval = setInterval(() => {
-            let newTopValue = parsedValue + 15 + 'px'
-            setRandomImgStyle({ top: newTopValue })
-            console.log('this is latest top style',randomImgStyle);
+            let newBottomValue = parsedValue - 10 + 'px'
+            // console.log(randomImgStyle);
+            let updateBottomStyle = {bottom: newBottomValue}
+            console.log(updateBottomStyle);
+            setRandomImgStyle(updateBottomStyle)
+            // console.log('this is latest bottom style',randomImgStyle);
+            // let boatImg = boatImgRef.current 
+            // console.log('boatimg element',boatImg);
+            // let parsedValue = parseInt(boatImg.style.height)
+            // console.log('height of boat img',parsedValue);
+
         }, 100);
         return () => {
             clearInterval(interval);
-          };
+        };
 
     }, [randomImgStyle])
 
+// console.log(randomImgStyle);
 
 
 
