@@ -36,7 +36,12 @@ app.get('/', async (req, res) => {
         res.json(err)
     }
 });
-
+/**
+ * purpose: the purpose of this API is to save the current score of the player to the database.
+ * Arguments: it takes two arguments (req, res).
+ *             req: takes an object that contains name and score of the player.
+ *             res: sends the saved score object as a response.
+ */
 app.post('/score', async (req, res) => {
     const newScore = new gameScore(req.body)
     try {

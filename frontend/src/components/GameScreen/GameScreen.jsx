@@ -3,26 +3,38 @@ import './GameScreen.scss'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useRef } from 'react';
+// import ScoreSubmitBox from '../ScoreSubmitBox/ScoreSubmitBox';
+import { useNavigate } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import { addScore,minusScore } from '../../store/scoreSlice';
+
+
+let currentTime = Date.now()
+let endTime = currentTime + 80000
 
 const GameScreen = () => {
 
-    const [randomImgStyle, setRandomImgStyle] = useState({ bottom: '550px', left: '500px', display: 'block' });
+    const [randomImgStyle, setRandomImgStyle] = useState({ bottom: '540px', left: '500px', display: 'block' });
     const [boatStyles, setBoatStyles] = useState({ left: '500px', height: '120px' });
     const [randomImage, setRandomImage] = useState('');
     const [topScore, setTopScore] = useState(0);
     const [score, setScore] = useState(0);
-  
+
+    //navigate hook is used later to navigating to saveScore box when the game time has expired//
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     // === using useRef hook === //
     let boatImgRef = useRef(null);
     let randomImgRef = useRef(null);
 
     //================= ImageArray to store image paths ==============//
-    const ImgArray = ['/p1.png', '/p2.png', '/p3.png', '/p4.png', '/e1.png', '/e2.png']
+    const ImgArray = ['p1.png', 'p2.png', 'p3.png', 'p4.png', 'e1.png', 'e2.png']
     const randomIndex = Math.floor(Math.random() * 6);
 
 
     // ===making use of useState for scoreIncreased so that score increases only once===//
-    const [scoreIncreased, setScoreIncreased] = useState(false);
+    // const [scoreIncreased, setScoreIncreased] = useState(false);
 
 
     //=== below logic is to add 50 points or minus 100 points according to the image caught by boat ====//
@@ -31,18 +43,23 @@ const GameScreen = () => {
         let imgUrl = randomImg.src
         let image1 = 'http://localhost:5173/e1.png'
         let image2 = 'http://localhost:5173/e2.png'
-        if (imgUrl == image1 || imgUrl == image2) {
-            setScore(score -100);
-            setScoreIncreased(true);
+        if (imgUrl === image1 || imgUrl === image2) {
+            // console.log('current score', score);
+            let updatedScore = score - 100
+            setScore(updatedScore);
+            dispatch(minusScore(score));
+            // console.log('negative new score', score);
+            // setScoreIncreased(true);
         } else {
-            setScore(score + 50);
-            setScoreIncreased(true);
+            // console.log('current score', score);
+            let updatedScore = score + 50
+            setScore(updatedScore);
+            dispatch(addScore(score));
         }
+        // console.log(score);
+    //======== dispatching addScore to add score in store======//
+        // dispatch(addScore(score));
 
-        // if(scoreIncreased){
-        //     setRandomImage(ImgArray[randomIndex]); 
-        // }
-        
     };
 
     //==========checkIntersection function is to check if the boat touched the random image==========//
@@ -53,35 +70,41 @@ const GameScreen = () => {
 
         //======== accessing random image properties ==========//
         let randomImg = randomImgRef.current
-        let parsedBottomValue = parseInt(randomImg.style.bottom);
+        let imageBottomValue = parseInt(randomImg.style.bottom);
         // let newDisplayProperty = 'none'
-        let ImgLeftValue = parseInt(randomImg.style.left)
-        // console.log('image left Value',ImgLeftValue);
+        let imgLeftValue = parseInt(randomImg.style.left)
+        // console.log('image left Value',imgLeftValue);
 
         //======== accessing boat image properties ==========//
         let boatImg = boatImgRef.current
-        let parsedHeightValue = parseInt(boatImg.style.height);
+        let boatHeightValue = parseInt(boatImg.style.height);
         let boatLeftValue = parseInt(boatImg.style.left)
 
         //after the falling image touches the boat image height, the score is updated and the display of the falling image is set to none//
-        if (parsedHeightValue >= parsedBottomValue && ImgLeftValue === boatLeftValue && !scoreIncreased) {
 
-            //****** the function checkImgUrl is defined above ******//
-            checkImgUrl();
+        // if (boatHeightValue === imageBottomValue && imgLeftValue === boatLeftValue) {
+        if (boatHeightValue === imageBottomValue) {
+            // in this case the boat image and random image are at same left value//
+            if (imgLeftValue === boatLeftValue) {
+                //*** the function checkImgUrl is defined above ***//
+                // console.log('intersection exists');
+                checkImgUrl();
+            }
+            // in this case the boat image is on left and random img is on right//
+            else if (boatLeftValue < imgLeftValue) {
 
-            //******** updating display property of randomImgStyle using spread opeartor *******//
-            setRandomImgStyle(prevStyle => ({
-                ...prevStyle,
-                // display: newDisplayProperty
-                display : 'none'
-            }));
-
-            //******setting display back to 'block so that image dropping again is visible*****//
-            setRandomImgStyle((prevStyle) => ({
-                ...prevStyle,
-                display:'block'
-            }));
-            // console.log(randomImgStyle.bottom);
+                if (imgLeftValue - boatLeftValue < 100) {
+                    // console.log('left intersection exists');
+                    checkImgUrl();
+                }
+            }
+            // in this case the boat image is on right and random img is on left//
+            else {
+                if (boatLeftValue - imgLeftValue < 100) {
+                    // console.log('right intersection exists');
+                    checkImgUrl();
+                }
+            }
         }
     };
 
@@ -91,11 +114,8 @@ const GameScreen = () => {
         const fetchData = async () => {
             const response = await fetch('http://localhost:8080/')
             const data = await response.json()
-            // console.log(data);
             const scoresArray = data.map((item) => item.score)
-            // console.log('scoresArray',scoresArray);
             const highestScore = Math.max(...scoresArray);
-            // console.log(highestScore);
             setTopScore(highestScore)
         }
         fetchData();
@@ -104,8 +124,8 @@ const GameScreen = () => {
         //=== had to update randomImage state inside the useEffect because calling the setRandomImage function inside the component body triggers a re-render.
         // and it, in turn, causes the component to re-render infinitely, resulting in the error message.  
 
-         // =====this is for changing random image, it is kept here inside this useState because this useState has an
-         //=== empty dependency array which means it will render when the browser refreshes and hence it will give us random images when browser refresher === //
+        // =====this is for changing random image, it is kept here inside this useState because this useState has an
+        //=== empty dependency array which means it will render when the browser refreshes and hence it will give us random images when browser refresher === //
         setRandomImage(ImgArray[randomIndex]);
         //=========================================================================================//   
 
@@ -146,41 +166,47 @@ const GameScreen = () => {
     //==otherwise  the initial value is null and if we access it immediately then it will be null or give errors//
 
 
-
     // =============== this useEffect is for dropping down the random image from top =============//
-    useEffect(() => {
-        let randomImgElement = randomImgRef.current
-        // console.log(randomImgElement);
-        // need to parse the bottom value bcoz it is coming along with 'px' and we only need numeric value//
-        let imgBottomValue = parseInt(randomImgElement.style.bottom) 
-        const interval = setInterval(() => {
-        let newBottomValue = imgBottomValue - 20 + 'px'
 
-            setRandomImgStyle((prevStyle) => ({
-                ...prevStyle,
-                bottom: newBottomValue
-            }));
+    if (Date.now() < endTime) {
 
-            //== the function checkIntersection is defined above ===//
-            checkIntersection();
-          
-            // below if statement to check so that random image starts dropping again from top //
-            if(imgBottomValue === -10){
+        useEffect(() => {
+            let randomImgElement = randomImgRef.current
+            // need to parse the bottom value bcoz it is coming along with 'px' and we only need numeric value//
+            let imgBottomValue = parseInt(randomImgElement.style.bottom)
+
+            const interval = setInterval(() => {
+                let newBottomValue = imgBottomValue - 20 + 'px'
+
                 setRandomImgStyle((prevStyle) => ({
                     ...prevStyle,
-                    bottom: 550 + 'px'
+                    bottom: newBottomValue
                 }));
-                //when image bottom value is again made 550px as stated in above line then setRandomImage method will give another random image from top//
-                setRandomImage(ImgArray[randomIndex]); 
+
+                //== the function checkIntersection is defined above ===//
+                checkIntersection();
+
+                // below if statement to check so that random image starts dropping again from top //
+                if (imgBottomValue === -20) {
+                    setRandomImgStyle((prevStyle) => ({
+                        ...prevStyle,
+                        bottom: 540 + 'px'
+                    }));
+                    //when image bottom value is again made 550px as stated in above line then setRandomImage method will give another random image from top//
+                    setRandomImage(ImgArray[randomIndex]);
+                };
+
+            }, 100);
+            return () => {
+                clearInterval(interval);
             };
-           
 
-        }, 100);
-        return () => {
-            clearInterval(interval);
-        };
+        }, [randomImgStyle])
+    }
 
-    }, [randomImgStyle])
+    if (Date.now() >= endTime) {
+        navigate("/saveScore");//navigate hook is navigating to saveScore box when the game time has expired// 
+    };
 
 
 

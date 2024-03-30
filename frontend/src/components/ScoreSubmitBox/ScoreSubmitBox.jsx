@@ -1,7 +1,13 @@
 import React from 'react'
 import './ScoreSubmitbox.scss'
+import { Link } from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
 const ScoreSubmitBox = () => {
+
+    const score = useSelector(state => state.score[0])
+    // console.log('score in submit box',score);
+
     return (
         <div className='mostOuterContainer'>
 
@@ -10,15 +16,16 @@ const ScoreSubmitBox = () => {
                 <div className='parentContainer' >
                     {/* <div className="subContainer"> */}
                     <div className='boxTitle'>
-                        <h1>Save Your Score</h1>
+                        <h1>Game Over</h1>
                     </div>
 
                     <div className='infoContainer'>
                         <div className='scoreContainer'>
                             <h2>Your Score</h2>
-                            <p>1234</p>
+                            <p>{score}</p>
                             <input type="text" placeholder='Enter Your Name' name="" id="" />
                             <button>Save</button>
+                           <Link to={'/'}> <button className='goHomeBtn'>go home</button></Link>
                         </div>
 
                     </div>

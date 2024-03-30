@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     background-color: #c4c4c4;
+    //border: 2px solid red;
 }
 
 .outerMostContainer{
@@ -23,7 +24,7 @@
     background-image: url('/bg1.png');
     // border: 1px solid blue;
     border-radius: 20px;
-    height: 50%;
+    height: 60%;
     width: 40%;
 }
 
@@ -32,7 +33,7 @@
     text-align: center;
     padding: 10px;
     >h1{
-        font-size: 40px;
+        font-size: 70px;
     }
 }
 
@@ -70,10 +71,10 @@
         padding: 10px;
         margin-bottom: 5px;
     }
-    >button{
+    >button,.goHomeBtn{
         height: 30px;
         width: 80px;
-        font-size: 20px;
+        font-size: 15px;
         font-weight: bold;
         border-radius:5px;
         color: rgb(214, 211, 211);

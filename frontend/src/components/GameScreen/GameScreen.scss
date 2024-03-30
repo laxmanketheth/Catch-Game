@@ -33,8 +33,10 @@
 .randomImg{
     position: absolute;
     height: 15%;
-    left: 500px;
+    width: 8%;
+    // left: 500px;
     // bottom: 0px;
+    border: 1px solid red;
 }
 
 .boatContainer{
@@ -49,7 +51,7 @@
     // left: 500px;
     bottom: 0px;
     height: 20%;
-    // height: 120px;
+    width: 8%;
     transition: 0.1s linear;
     border: 1px solid greenyellow;
     
