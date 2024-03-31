@@ -1,5 +1,5 @@
 import React from 'react'
-import './ScoreSubmitbox.scss'
+import './ScoreSubmitBox.scss'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
@@ -10,7 +10,8 @@ const ScoreSubmitBox = () => {
     const [inputData, setInputData] = useState('');
     // console.log('input val',inputData);
     const [playerData, setPlayerData] = useState({})
-    console.log(playerData);
+    // console.log(playerData);
+    let base_url = 'https://catch-game-backend.vercel.app'
 
     const handleChange = (e) => {
         const value = e.target.value
@@ -32,7 +33,7 @@ const ScoreSubmitBox = () => {
 
     // =============== saving to database ========= //
     useEffect(() => {
-        fetch('http://localhost:8080/score', {
+        fetch(base_url + '/score', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
