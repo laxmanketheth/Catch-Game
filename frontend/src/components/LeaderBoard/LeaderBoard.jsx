@@ -19,15 +19,7 @@ const LeaderBoard = () => {
               <hr />
             </div>
 
-            <ScoreBoard/>
-
-            {/* <div className="scoreBoardContainer">
-
-              <div className='scoreBoard' >
-              <h1>Top players</h1>
-              </div>
-              
-            </div> */}
+            <ScoreBoard />
 
           </div>
         </div>

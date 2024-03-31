@@ -4,11 +4,12 @@ import './ScoreBoard.scss'
 import { Link } from 'react-router-dom'
 
 const ScoreBoard = () => {
-    const [gameData, setGameData] = useState([])
+    const [gameData, setGameData] = useState([]);
+    let base_url = 'https://catch-game-backend.vercel.app'
 
     useEffect(() => {
         const fetchData = async () => {
-            const response  = await fetch('http://localhost:8080/')
+            const response  = await fetch(base_url + '/')
             const data = await response.json()
             // console.log(result);
             const sortedData = data.sort((a,b)=>b.score - a.score)

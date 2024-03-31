@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { addScore, minusScore } from '../../store/scoreSlice';
 
+let base_url = 'https://catch-game-backend.vercel.app'
 
 let currentTime = Date.now()
 let endTime = currentTime + 80000
@@ -103,7 +104,7 @@ const GameScreen = () => {
     //========== this useEffect is for fetching data and setting highest score on page ==========//
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/')
+            const response = await fetch(base_url + '/')
             const data = await response.json()
             const scoresArray = data.map((item) => item.score)
             const highestScore = Math.max(...scoresArray);
