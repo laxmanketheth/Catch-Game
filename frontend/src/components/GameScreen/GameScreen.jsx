@@ -43,8 +43,8 @@ const GameScreen = () => {
     const checkImgUrl = () => {
         let randomImg = randomImgRef.current // .current is object property available on useRef hook//
         let imgUrl = randomImg.src
-        let image1 = 'http://localhost:5173/e1.png'
-        let image2 = 'http://localhost:5173/e2.png'
+        let image1 = 'https://catch-game-frontend.vercel.app/e1.png'
+        let image2 = 'https://catch-game-frontend.vercel.app/e2.png'
 
         if (imgUrl === image1 || imgUrl === image2) {
             let updatedScore = - 100
