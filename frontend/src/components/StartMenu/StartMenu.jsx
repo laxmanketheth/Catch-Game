@@ -6,7 +6,7 @@ const StartMenu = () => {
     return (
         <div className='container'>
             <div className='heading'>
-                <h1 className='gameTitle'>Catcher Game</h1>
+                <h1 className='gameTitle'>Catch Fever</h1>
             </div>
 
             <div className='subContainer'>

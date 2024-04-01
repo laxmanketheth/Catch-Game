@@ -8,7 +8,7 @@ const LeaderBoard = () => {
       <div className="ParentBox">
 
         <div className='header'>
-          <h1 className='title'>Catcher Game</h1>
+          <h1 className='title'>Catch Fever</h1>
         </div>
 
         <div className='imgContainer'>

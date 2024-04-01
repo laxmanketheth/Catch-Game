@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { addScore, minusScore } from '../../store/scoreSlice';
 
-let base_url = 'https://catch-game-backend.vercel.app'
+
 
 let currentTime = Date.now()
 let endTime = currentTime + 80000
@@ -25,6 +25,8 @@ const GameScreen = () => {
     const dispatch = useDispatch();
     const score = useSelector(state => state.score)
     // console.log('reading score',score);
+
+    let base_url = 'https://catch-game-backend.vercel.app';
 
     // === using useRef hook === //
     let boatImgRef = useRef(null);
@@ -205,7 +207,7 @@ const GameScreen = () => {
     return (
         <div className='container'>
             <div className='heading'>
-                <h1 className='gameHeading'>Catcher Game</h1>
+                <h1 className='gameHeading'>Catch Fever</h1>
             </div>
 
             <div className='subContainer'>
@@ -217,6 +219,7 @@ const GameScreen = () => {
                             ref={randomImgRef}
                             src={randomImage}
                             alt="randomImg"
+                            
 
                         />}
 
