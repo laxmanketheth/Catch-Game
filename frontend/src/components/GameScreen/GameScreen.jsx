@@ -11,7 +11,7 @@ import { addScore, minusScore } from '../../store/scoreSlice';
 
 
 let currentTime = Date.now()
-let endTime = currentTime + 62000
+let endTime = currentTime + 67000
 
 const GameScreen = () => {
 
