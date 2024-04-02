@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { addScore, minusScore } from '../../store/scoreSlice';
+import ScoreSubmitBox from '../ScoreSubmitBox/ScoreSubmitBox';
 
 
 const GameScreen = () => {
@@ -18,9 +19,9 @@ const GameScreen = () => {
     //navigate hook is used later to navigating to saveScore box when the game time has expired//
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const endTime = useSelector(state => state.score.endTime);
     const score = useSelector(state => state.score.score);
     // console.log('reading score',score);
+    const endTime = useSelector(state => state.score.endTime);
 
     // let base_url = 'https://catch-game-backend.vercel.app';
     let base_url = 'http://localhost:8080'
@@ -108,6 +109,7 @@ const GameScreen = () => {
         const fetchData = async () => {
             const response = await fetch(base_url + '/')
             const data = await response.json()
+            // console.log(data);
             const scoresArray = data.map((item) => item.score)
             const highestScore = Math.max(...scoresArray);
             setTopScore(highestScore)
@@ -200,7 +202,13 @@ const GameScreen = () => {
 
     if (Date.now() >= endTime) {
         navigate("/saveScore");//navigate hook is navigating to saveScore box when the game time has expired// 
-    };
+        // <ScoreSubmitBox/>
+    }
+    // useEffect(() => {
+    //     if (Date.now() >= endTime) {
+    //         navigate("/saveScore");//navigate hook is navigating to saveScore box when the game time has expired// 
+    //     };
+    // },[])
 
 
 

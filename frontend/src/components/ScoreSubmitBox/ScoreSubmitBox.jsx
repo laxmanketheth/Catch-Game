@@ -49,7 +49,6 @@ const ScoreSubmitBox = () => {
             <div className='outerMostContainer'>
 
                 <div className='parentContainer' >
-                    {/* <div className="subContainer"> */}
                     <div className='boxTitle'>
                         <h1>Game Over</h1>
                     </div>
@@ -72,10 +71,8 @@ const ScoreSubmitBox = () => {
                             </button>
                             <Link to={'/'}> <button className='goHomeBtn'>go home</button></Link>
                         </div>
-
                     </div>
 
-                    {/* </div> */}
                 </div>
             </div>
 

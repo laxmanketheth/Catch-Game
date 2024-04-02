@@ -1,3 +1,4 @@
+@import '../../mixin.scss';
 .scoreBoardContainer {
     // border: 2px solid rgb(172, 172, 28);
     margin: 30px;
@@ -5,6 +6,9 @@
     width: 90vw;
     display: flex;
     justify-content: center;
+    @include md{
+        margin: 5px;
+    }
 }
 
 .scoreBoard {
@@ -21,6 +25,10 @@
     flex-direction: column;
     align-items: center;
     overflow: auto;
+    @include md{
+        padding-top: 15px;
+        width: 90%;
+    }
 }
 
 .topPlayerTitle {
@@ -28,15 +36,26 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    // border: 1px solid greenyellow;
+    // border: 1px solid blue;
+    @include md{
+        flex-direction: column;
+        align-items: center;
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
 }
 
 .scoreBoard>div>h1 {
+    // border: 1px solid greenyellow;
     background-color: rgb(158, 66, 66, 0.8);
     color: rgb(216, 212, 212);
     padding: 2px 5px;
     border-radius: 10px;
-    border-bottom: 3px solid rgb(186, 186, 186)
+    border-bottom: 3px solid rgb(186, 186, 186);
+    @include md{
+        width: 100%;
+        text-align: center;
+    }
 }
 
 .gohomeBtn {
@@ -57,11 +76,24 @@
         transform: scale(1.08);
         transition: background-color 0.5s ease, transform 0.5s ease;
     }
+     @include md{
+        margin-top: 2px;
+    }
+}
+
+.playerDataTitle{
+    @include md{
+        width: 100%;
+        text-align: center;
+        // font-size: 29px;
+        display: none !important;
+        border: 2px solid red;
+    }
 }
 
 .playerData,
 .playerDataTitle {
-    // border: 2px solid rgb(132, 122, 122);
+    // border: 2px solid red;
     margin-top: 10px;
     padding: 10px;
     width: 70%;

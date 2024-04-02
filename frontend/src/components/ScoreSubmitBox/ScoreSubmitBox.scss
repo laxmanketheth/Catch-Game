@@ -1,16 +1,18 @@
-.mostOuterContainer{
+@import '../../mixin.scss';
+
+.mostOuterContainer {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #c4c4c4;
-    //border: 2px solid red;
+    // border: 2px solid red;
 }
 
-.outerMostContainer{
+.outerMostContainer {
     background-image: url('/bg1.png');
-    // border: 2px solid red;
-    border: none;
+    // border: 2px solid greenyellow;
+    background-size: cover;
     box-shadow: 0 0 8px 2px rgb(5, 51, 76);
     height: 80vh;
     width: 75vw;
@@ -20,33 +22,50 @@
     border-radius: 20px;
 }
 
-.parentContainer{
+.parentContainer {
     background-image: url('/bg1.png');
-    // border: 1px solid blue;
+    // border: 2px solid greenyellow;
     border-radius: 20px;
-    height: 60%;
+    height: 80%;
     width: 40%;
-}
 
-.boxTitle{
-    // border: 2px solid purple;
-    text-align: center;
-    padding: 10px;
-    >h1{
-        font-size: 70px;
+    @include md {
+        width: 70%;
+        font-size: 20px;
+        height: 80%;
+    }
+
+    @include sm {
+        width: 100%;
+        height: 70%;
     }
 }
 
-.infoContainer{
+.boxTitle {
+    // border: 2px solid purple;
+    text-align: center;
+    padding: 10px;
+
+    >h1 {
+        font-size: 70px;
+
+        @include md {
+            font-size: 40px;
+        }
+    }
+
+}
+
+.infoContainer {
     height: 70%;
     width: 100%;
     display: flex;
     justify-content: center;
-    // margin-top: 20px;
     align-items: center;
-    // border: 1px solid greenyellow;
+    // border: 1px solid red;
 }
-.scoreContainer{
+
+.scoreContainer {
     // border: 2px solid blueviolet;
     display: flex;
     flex-direction: column;
@@ -54,10 +73,29 @@
     align-items: center;
     width: 80%;
     height: 100%;
-    >h2{
-        font-size: 30px;
+
+    @include md {
+        width: 90%;
+        font-size: 10px;
     }
-    >p{
+
+    >h2 {
+        font-size: 30px;
+
+        @include sm {
+            // border: 1px solid green;
+            width: 100%;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        @include md {
+            // width: 70%;
+            font-size: 30px;
+        }
+    }
+
+    >p {
         font-size: 35px;
         border: 2px solid;
         padding: 5px 10px;
@@ -65,25 +103,60 @@
         background-color: rgb(214, 211, 211);
         margin-bottom: 15px;
     }
-    >input{
+
+    >input {
         height: 40px;
         border-radius: 5px;
         padding: 10px;
         margin-bottom: 5px;
+
+        @include md {
+            width: 60%;
+            height: 50px;
+            font-size: 20px;
+        }
+
+        @include sm {
+            width: 70%;
+            height: 45px;
+            font-size: 20px;
+        }
     }
-    >button,.goHomeBtn{
-        height: 30px;
-        width: 80px;
+
+    >button,
+    .goHomeBtn {
+        height: 35px;
+        width: 60%;
         font-size: 15px;
         font-weight: bold;
-        border-radius:5px;
+        border-radius: 5px;
         color: rgb(214, 211, 211);
-        background-color:rgb(158, 66, 66, 0.9);
-        &:hover{
+        background-color: rgb(158, 66, 66, 0.9);
+
+        &:hover {
             transform: scale(1.2);
             transition: transform 0.25s ease;
             color: rgb(158, 66, 66, 0.9);
             background: rgb(214, 211, 211);
         }
+
+        @include md {
+            width: 60%;
+            height: 35px;
+            font-size: 25px;
+            padding: 2px;
+        }
+
+        @include sm {
+            width: 70%;
+            height: 35px;
+            font-size: 25px;
+            padding: 2px;
+        }
     }
+
+}
+
+.goHomeBtn {
+    width: 230px !important;
 }
