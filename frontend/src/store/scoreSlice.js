@@ -1,17 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const scoreSlice = createSlice({
-    name: 'score',
-    initialState: 0,
-    reducers: {
-      addScore(state, action){
-        return  state + action.payload;
-      },
-      minusScore(state,action){
-        return state + action.payload;
-      }
+  name: 'score',
+  initialState: {
+    score: 0,
+    endTime: Date.now()
+  },
+  reducers: {
+    addScore(state, action) {
+      // return state + action.payload;
+       state.score += action.payload;
+    },
+    minusScore(state, action) {
+      // return state + action.payload;
+       state.score += action.payload;
+    },
+    initialiseStates(state, action){
+        state.score = 0,
+        state.endTime = Date.now() + 64000
     }
+  }
 });
 
-export const {  addScore,minusScore } = scoreSlice.actions
+export const {addScore, minusScore, initialiseStates} = scoreSlice.actions
 export default scoreSlice.reducer;

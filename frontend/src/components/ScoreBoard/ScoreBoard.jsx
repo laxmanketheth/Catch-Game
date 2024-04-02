@@ -42,13 +42,11 @@ const ScoreBoard = () => {
 
                     {gameData.map((person,index) => {
                         return (
-                            // <>
                                 <div key={person._id} className='playerData' >
                                     <div>{index+1}</div>
                                     <div>{person.playerName}</div>
                                     <div>{person.score}</div>
                                 </div>
-                            // </>
                         )
                     })
                     }

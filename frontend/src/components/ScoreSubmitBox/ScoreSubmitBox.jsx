@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 
 const ScoreSubmitBox = () => {
 
-    const score = useSelector(state => state.score);
+    const score = useSelector(state => state.score.score);
     const [inputData, setInputData] = useState('');
     // console.log('input val',inputData);
     const [playerData, setPlayerData] = useState({})

@@ -1,17 +1,12 @@
-import React from 'react'
-import './GameScreen.scss'
-import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import React from 'react';
+import './GameScreen.scss';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useRef } from 'react';
-// import ScoreSubmitBox from '../ScoreSubmitBox/ScoreSubmitBox';
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { addScore, minusScore } from '../../store/scoreSlice';
 
-
-
-let currentTime = Date.now()
-let endTime = currentTime + 64000
 
 const GameScreen = () => {
 
@@ -23,7 +18,8 @@ const GameScreen = () => {
     //navigate hook is used later to navigating to saveScore box when the game time has expired//
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const score = useSelector(state => state.score)
+    const endTime = useSelector(state => state.score.endTime);
+    const score = useSelector(state => state.score.score);
     // console.log('reading score',score);
 
     // let base_url = 'https://catch-game-backend.vercel.app';
@@ -52,10 +48,12 @@ const GameScreen = () => {
 
         if (imgname === image1 || imgname === image2) {
             let updatedScore = - 100
+            // console.log(updatedScore);
             dispatch(minusScore(updatedScore));
         } else {
             let updatedScore = + 50
             dispatch(addScore(updatedScore));
+            // console.log(updatedScore);
         }
 
     };
