@@ -11,7 +11,8 @@ const ScoreSubmitBox = () => {
     // console.log('input val',inputData);
     const [playerData, setPlayerData] = useState({})
     // console.log(playerData);
-    let base_url = 'https://catch-game-backend.vercel.app'
+    // let base_url = 'https://catch-game-backend.vercel.app'
+    let base_url = 'http://localhost:8080'
 
     const handleChange = (e) => {
         const value = e.target.value

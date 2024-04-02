@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom'
 
 const ScoreBoard = () => {
     const [gameData, setGameData] = useState([]);
-    let base_url = 'https://catch-game-backend.vercel.app'
+    // let base_url = 'https://catch-game-backend.vercel.app'
+    let base_url = 'http://localhost:8080'
 
+    //*** fetching all scores fro score board ***/
     useEffect(() => {
         const fetchData = async () => {
             const response  = await fetch(base_url + '/')
             const data = await response.json()
-            // console.log(result);
+            // console.log(data);
             const sortedData = data.sort((a,b)=>b.score - a.score)
             setGameData(sortedData)
         }

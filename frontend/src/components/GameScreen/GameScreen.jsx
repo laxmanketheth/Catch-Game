@@ -26,7 +26,8 @@ const GameScreen = () => {
     const score = useSelector(state => state.score)
     // console.log('reading score',score);
 
-    let base_url = 'https://catch-game-backend.vercel.app';
+    // let base_url = 'https://catch-game-backend.vercel.app';
+    let base_url = 'http://localhost:8080'
 
     // === using useRef hook === //
     let boatImgRef = useRef(null);
@@ -44,11 +45,12 @@ const GameScreen = () => {
     //=== below logic is to add 50 points or minus 100 points according to the image caught by boat ====//
     const checkImgUrl = () => {
         let randomImg = randomImgRef.current // .current is object property available on useRef hook//
-        let imgUrl = randomImg.src
-        let image1 = 'https://catch-game-frontend.vercel.app/e1.png'
-        let image2 = 'https://catch-game-frontend.vercel.app/e2.png'
+        let imgname = randomImg.name
+        // console.log(imgname);
+        let image1 = 'e1.png'
+        let image2 = 'e2.png'
 
-        if (imgUrl === image1 || imgUrl === image2) {
+        if (imgname === image1 || imgname === image2) {
             let updatedScore = - 100
             dispatch(minusScore(updatedScore));
         } else {
@@ -215,9 +217,10 @@ const GameScreen = () => {
                     <div className='boatContainer'>
 
                         {<img className='randomImg'
-                            style={randomImgStyle}
-                            ref={randomImgRef}
-                            src={randomImage}
+                            style= {randomImgStyle}
+                            ref= {randomImgRef}
+                            src= {randomImage}
+                            name = {randomImage}
                             alt="randomImg"
                             
 

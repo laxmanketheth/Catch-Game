@@ -10,7 +10,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors(
     {
-        origin: 'https://catch-game-frontend.vercel.app',
+        // origin: 'https://catch-game-frontend.vercel.app',
+        // origin:'http://localhost:5173/',
+        origin: '*',
         methods: ['POST', 'GET', 'DELETE'],
         credentials: true
     }
@@ -18,7 +20,7 @@ app.use(cors(
 app.use(express.json())
 
 dotenv.config();
-const port = 8080
+const port = 8080;
 
 const gameScore = require('./model/catchgame');
 
@@ -36,6 +38,7 @@ app.get('/', async (req, res) => {
         res.json(err)
     }
 });
+
 /**
  * purpose: the purpose of this API is to save the current score of the player to the database.
  * Arguments: it takes two arguments (req, res).
