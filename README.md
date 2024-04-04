@@ -27,7 +27,7 @@ Catch Fever is a fun game developed using React, Vite, Redux Toolkit, and SCSS. 
   - MongoDB
   - dotenv
 
-   **API's**
+- **API's**
    1. '/'    
    - Request Method : GET
    - Purpose: to get the list of players with their names and scores.
