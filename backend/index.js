@@ -30,10 +30,10 @@ mongoose.connect(process.env.MONGO_URL)
 
 
 /**
- * purpose: the purpose of this API is to get the current score of the player to the database.
+ * purpose: the purpose of this API is to get all data of the player from the database.
  * Arguments: it takes two arguments (req, res).
- *             req: takes an object that contains name and score of the player.
- *             res: sends the saved score object as a response.
+ *             req: there is no payload in get request.
+ *             res: sends the gameData as a response.
  */
 app.get('/', async (req, res) => {
     try {

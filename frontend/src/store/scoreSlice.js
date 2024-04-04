@@ -8,11 +8,9 @@ const scoreSlice = createSlice({
   },
   reducers: {
     addScore(state, action) {
-      // return state + action.payload;
        state.score += action.payload;
     },
     minusScore(state, action) {
-      // return state + action.payload;
        state.score += action.payload;
     },
     initialiseStates(state, action){
