@@ -16,14 +16,13 @@ const GameScreen = () => {
     const [topScore, setTopScore] = useState(0);
     const [imgContainerWidth, setImgContainerWidth] = useState();
 
-    //navigate hook is used later to navigating to saveScore box when the game time has expired//
+    //== navigate hook is used later to navigating to saveScore box when the game time has expired ==//
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const score = useSelector(state => state.score.score);
     const endTime = useSelector(state => state.score.endTime);
 
     let base_url = 'https://catch-game-backend.vercel.app';
-    // let base_url = 'http://localhost:8080'
 
     /// *** using useRef hook *** ///
     let boatImgRef = useRef(null);
