@@ -8,11 +8,10 @@ const ScoreSubmitBox = () => {
 
     const score = useSelector(state => state.score.score);
     const [inputData, setInputData] = useState('');
-    // console.log('input val',inputData);
-    const [playerData, setPlayerData] = useState({})
+    const [playerData, setPlayerData] = useState({});
     // console.log(playerData);
-    // let base_url = 'https://catch-game-backend.vercel.app'
-    let base_url = 'http://localhost:8080'
+    let base_url = 'https://catch-game-backend.vercel.app'
+    // let base_url = 'http://localhost:8080'
 
     const handleChange = (e) => {
         const value = e.target.value
@@ -49,7 +48,6 @@ const ScoreSubmitBox = () => {
             <div className='outerMostContainer'>
 
                 <div className='parentContainer' >
-                    {/* <div className="subContainer"> */}
                     <div className='boxTitle'>
                         <h1>Game Over</h1>
                     </div>
@@ -72,10 +70,8 @@ const ScoreSubmitBox = () => {
                             </button>
                             <Link to={'/'}> <button className='goHomeBtn'>go home</button></Link>
                         </div>
-
                     </div>
 
-                    {/* </div> */}
                 </div>
             </div>
 

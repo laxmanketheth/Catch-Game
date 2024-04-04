@@ -29,10 +29,17 @@ mongoose.connect(process.env.MONGO_URL)
     .catch((err) => console.log(err))
 
 
+/**
+ * purpose: the purpose of this API is to get all data of the player from the database.
+ * Arguments: it takes two arguments (req, res).
+ *             req: there is no payload in get request.
+ *             res: sends the gameData as a response.
+ */
 app.get('/', async (req, res) => {
     try {
-        const gameData = await gameScore.find()
+        const gameData = await gameScore.find();
         res.json(gameData);
+
     }
     catch (err) {
         res.json(err)

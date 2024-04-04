@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 
 const ScoreBoard = () => {
     const [gameData, setGameData] = useState([]);
-    // let base_url = 'https://catch-game-backend.vercel.app'
-    let base_url = 'http://localhost:8080'
+    let base_url = 'https://catch-game-backend.vercel.app'
+    // let base_url = 'http://localhost:8080'
 
     //*** fetching all scores fro score board ***/
     useEffect(() => {

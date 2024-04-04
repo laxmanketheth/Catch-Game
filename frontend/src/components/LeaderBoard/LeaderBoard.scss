@@ -1,3 +1,5 @@
+@import '../../mixin.scss';
+
 .ParentBox{
     background-color: #c4c4c4;
     height: 100vh;
@@ -11,6 +13,7 @@
 }
 .imgContainer{
     height: 90%;
+    // border: 1px solid goldenrod;
 }
 
 .img{
@@ -21,10 +24,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    @include md{
+     background-position: center;   
+    }
+   
 }
 
 .ScoreTitle{
-    // border: 2px solid goldenrod;
+    // border: 2px solid greenyellow;
     margin-top: 20px;
     width: 30%;
     font-size: 20px;
@@ -36,5 +43,10 @@
     border-bottom: 3px solid rgb(186, 186, 186);
     >h1{
        color: rgb(186, 186, 186);
+    }
+    @include md{
+        margin-top: 10px;
+        width: 100%;
+
     }
 }
