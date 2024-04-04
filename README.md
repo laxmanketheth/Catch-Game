@@ -16,16 +16,40 @@ Catch Fever is a fun game developed using React, Vite, Redux Toolkit, and SCSS. 
 ## Technologies Used
 
 - **Frontend:**
-  - React: A JavaScript library for building user interfaces.
-  - Vite: A fast frontend build tool for modern web development.
-  - Redux Toolkit: A set of tools and best practices for efficient Redux development.
-  - SCSS: A CSS preprocessor that enhances the styling capabilities of CSS.
+  - React
+  - Vite
+  - Redux Toolkit
+  - SCSS
 
 - **Backend:**
-  - Node.js: A JavaScript runtime environment that allows running JavaScript on the server.
-  - Express.js: A web application framework for Node.js that simplifies server-side development.
-  - MongoDB: A NoSQL database for storing player scores and names.
-  - dotenv: A module for loading environment variables from a .env file.
+  - Node.js
+  - Express.js
+  - MongoDB
+  - dotenv
+
+   **API's**
+   1. '/'    
+   - Request Method : GET
+   - Purpose: to get the list of players with their names and scores.
+   - Response: sends the list of player and their score.
+   - Response object exapmle: 
+         [{"_id":"660c05214a1db0c93504e590","playerName":"Laxman","score":750,"__v":0},{"_id":"660e59726c457c78dc9aee25","playerName":"Alex","score":1050,"__v":0}]
+
+   2. '/score'
+   - Request Method: POST
+   - Purpose: to save the current score of the player to the database.
+   - Request: takes an object that contains name and score of the player.
+   - Request object exapmle:
+                {
+                   "playerName":"Laxman",
+                   "score":2000
+                }
+
+   - Response: sends the saved score object as a response.
+   - Response object exapmle: 
+            {"_id":"660c05214a1db0c93504e590","playerName":"Laxman","score":750,"__v":0}                 
+
+
 
 ## Prerequisites
 Before running the game, ensure you have the following installed on your machine:
@@ -43,11 +67,13 @@ Before running the game, ensure you have the following installed on your machine
    npm install
    ```
 3. Set up environment variables:
+
    - Create a `.env` file in the project's root directory.
    - Add the following variables to the `.env` file:
      ```
      MONGODB_URI=your-mongodb-uri
      ```
+
 4. Start the frontend and backend servers:
 	 - **Backend:**
    ```
