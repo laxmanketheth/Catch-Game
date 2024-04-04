@@ -33,22 +33,27 @@ Catch Fever is a fun game developed using React, Vite, Redux Toolkit, and SCSS. 
    - Purpose: to get the list of players with their names and scores.
    - Response: sends the list of player and their score.
    - Response object exapmle: 
+         ```
          [{"_id":"660c05214a1db0c93504e590","playerName":"Laxman","score":750,"__v":0},{"_id":"660e59726c457c78dc9aee25","playerName":"Alex","score":1050,"__v":0}]
+         ```
 
    2. '/score'
    - Request Method: POST
    - Purpose: to save the current score of the player to the database.
    - Request: takes an object that contains name and score of the player.
    - Request object exapmle:
+               ```
                 {
                    "playerName":"Laxman",
                    "score":2000
                 }
+               ```
 
    - Response: sends the saved score object as a response.
    - Response object exapmle: 
+             ```
             {"_id":"660c05214a1db0c93504e590","playerName":"Laxman","score":750,"__v":0}                 
-
+             ```
 
 
 ## Prerequisites
