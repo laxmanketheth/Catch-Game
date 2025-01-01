@@ -12,7 +12,7 @@ Catch Fever is a fun game developed using React, Vite, Redux Toolkit, and SCSS. 
   - Backend server using Node.js and Express.js.
   - MongoDB database to store player scores and names.
   - Environment variable configuration using dotenv.
-
+ 
 ## Technologies Used
 
 - **Frontend:**
