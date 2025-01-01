@@ -5,7 +5,7 @@ Catch Fever is a fun game developed using React, Vite, Redux Toolkit, and SCSS. 
 
 # features
 
-  - Boat controlled by left and right arrow keys.
+  - Boat controlled by left and right arrow keys. 
   - Random images falling from the top.
   - Score that increases or decreases based on successful catches.
   - Scoreboard to save and view player scores.
